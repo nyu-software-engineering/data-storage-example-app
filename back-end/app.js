@@ -17,14 +17,6 @@ app.use(cookieParser()) // useful middleware for dealing with cookies
 // the following cors setup is important when working with cookies on your local machine
 app.use(cors({ origin: "http://localhost:3002", credentials: true })) // allow incoming requests only from a "trusted" host
 
-// take some data from a post request and save it to a file
-app.get("/save-to-file", (req, res) => {
-  const name = req.body.name
-  const message = req.body.message
-  console.log(JSON.stringify(data, null, 2)) // debugging
-  res.send("yes")
-})
-
 // a route that sends a response including the Set-Cookie header.
 app.get("/set-cookie", (req, res) => {
   res
