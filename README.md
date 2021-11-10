@@ -4,6 +4,8 @@ This repository contains a client app built with React and a server app built wi
 
 The front-end and back-end code together show how to use simple Cookie and LocalStorage technologies - data storage tools available within the web browser.
 
+I hope to add examples of server-side storage later...
+
 ## Run the front-end
 
 Navigate into the `front-end` directory and...
