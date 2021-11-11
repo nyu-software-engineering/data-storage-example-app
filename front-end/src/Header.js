@@ -6,6 +6,7 @@ const Header = props => {
     <header className="Header">
       <h1>Data Storage Examples</h1>
       <nav className="navigation">
+        <p>Cookies</p>
         <ul>
           <li>
             <Link to="/set-cookie">set cookie</Link>
@@ -13,12 +14,18 @@ const Header = props => {
           <li>
             <Link to="/get-cookie">get cookie</Link>
           </li>
+        </ul>
+        <p>Local Storage</p>
+        <ul>
           <li>
             <Link to="/set-local-storage">set local storage</Link>
           </li>
           <li>
             <Link to="/get-local-storage">get local storage</Link>
           </li>
+        </ul>
+        <p>JWT Authentication</p>
+        <ul>
           <li>
             <Link to="/login">login with JWT</Link>
           </li>
