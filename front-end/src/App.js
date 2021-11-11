@@ -8,6 +8,7 @@ import GetCookie from "./GetCookie"
 import SetLocalStorage from "./SetLocalStorage"
 import GetLocalStorage from "./GetLocalStorage"
 import Login from "./Login"
+import Logout from "./Logout"
 import Protected from "./Protected"
 
 const App = props => {
@@ -22,6 +23,7 @@ const App = props => {
           <Route path="/set-local-storage" element={<SetLocalStorage />} />
           <Route path="/get-local-storage" element={<GetLocalStorage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/protected" element={<Protected />} />
         </Routes>
       </Router>

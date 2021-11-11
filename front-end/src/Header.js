@@ -23,7 +23,10 @@ const Header = props => {
             <Link to="/login">login with JWT</Link>
           </li>
           <li>
-            <Link to="/login">access protected content with JWT</Link>
+            <Link to="/protected">access protected content with JWT</Link>
+          </li>
+          <li>
+            <Link to="/logout">logout</Link>
           </li>
         </ul>
       </nav>

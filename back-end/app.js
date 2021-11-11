@@ -105,5 +105,14 @@ app.post("/login", function (req, res) {
   }
 })
 
+// a route to handle logging out users
+app.post("/logout", function (req, res) {
+  res.json({
+    success: true,
+    message:
+      "There is actually nothing to do on the server side... you simply need to delete your token from the browser's local storage!",
+  })
+})
+
 // export the express app we created to make it available to other modules
 module.exports = app // CommonJS export style!

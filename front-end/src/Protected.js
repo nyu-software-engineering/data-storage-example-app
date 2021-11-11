@@ -3,11 +3,11 @@ import { Navigate } from "react-router-dom"
 import axios from "axios"
 
 const Protected = props => {
-  const [response, setResponse] = useState({}) // we expect the server to send us a simple object in this case
-  const [isLoggedIn, setIsLoggedIn] = useState(true) // let's assume the user is logged in until proven otherwise
-
   const jwtToken = localStorage.getItem("token") // the JWT token, if we have already received one and stored it in localStorage
-  console.log(`JWT token: ${jwtToken}`)
+  console.log(`JWT token: ${jwtToken}`) // debugging
+
+  const [response, setResponse] = useState({}) // we expect the server to send us a simple object in this case
+  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true) // let's assume the user is not logged in until proven otherwise
 
   // try to load the protected data from the server when this component first renders
   useEffect(() => {
@@ -29,11 +29,18 @@ const Protected = props => {
 
   return (
     <>
-      <h2>Protected content!</h2>
       {isLoggedIn ? (
-        <pre>{JSON.stringify(response, null, 2)}</pre>
+        <>
+          <h2>Protected content!</h2>
+          <p>
+            Only authenticated users are allowed to view this page! The server
+            will reject requests for the data displayed on this page unless the
+            request includes a valid JWT token.
+          </p>
+          <pre>{JSON.stringify(response, null, 2)}</pre>
+        </>
       ) : (
-        <Navigate to="/login" />
+        <Navigate to="/login?error=protected" />
       )}
     </>
   )
