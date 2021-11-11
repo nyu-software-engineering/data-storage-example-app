@@ -7,14 +7,14 @@ const Protected = props => {
   console.log(`JWT token: ${jwtToken}`) // debugging
 
   const [response, setResponse] = useState({}) // we expect the server to send us a simple object in this case
-  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true) // let's assume the user is not logged in until proven otherwise
+  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true) // if we already have a JWT token in local storage, set this to true, otherwise false
 
   // try to load the protected data from the server when this component first renders
   useEffect(() => {
     // send the request to the server api, including the Authorization header with our JWT token in it
     axios
       .get(`${process.env.REACT_APP_BACKEND}/protected`, {
-        headers: { Authorization: `JWT ${jwtToken}` },
+        headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
       })
       .then(res => {
         setResponse(res.data) // store the response data
@@ -31,7 +31,11 @@ const Protected = props => {
     <>
       {isLoggedIn ? (
         <>
-          <h2>Protected content!</h2>
+          <h2>
+            Protected content
+            {response.user && ` only for you, ${response.user.username}`}!
+          </h2>
+          {response.message ? <p>{response.message}</p> : <>loading...</>}
           <p>
             Only authenticated users are allowed to view this page! The server
             will reject requests for the data displayed on this page unless the

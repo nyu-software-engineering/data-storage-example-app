@@ -61,8 +61,13 @@ app.get(
   (req, res) => {
     // our jwt passport config will send error responses to unauthenticated users will
     // so we only need to worry about sending data to properly authenticated users!
+
     res.json({
       success: true,
+      user: {
+        id: req.user.id,
+        username: req.user.username,
+      },
       message:
         "Congratulations: you have accessed this route because you have a valid JWT token!",
     })
