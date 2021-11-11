@@ -80,3 +80,7 @@ Open the front-end in your favorite web browser (most likely this will have popp
 
 - use the `Console` tab to see any debugging output from the Javascript code running in the browser.
 - use the `Network` tab to see details of all HTTP requests and responses to/from the back-end server. In particular, look at the cookie and authorization-related HTTP headers.
+
+### Back-end
+
+Watch the debugging output on the back-end to show incoming requests and their response codes.
