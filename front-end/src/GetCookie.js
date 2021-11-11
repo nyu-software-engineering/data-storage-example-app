@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 
@@ -9,7 +9,9 @@ const GetCookie = props => {
   // the following side-effect will be called once upon initial render
   useEffect(() => {
     // make a request to a route on the express server that sets a cookie in the browser
-    axios("http://localhost:3000/get-cookie", { withCredentials: true })
+    axios(`${process.env.REACT_APP_BACKEND}/get-cookie`, {
+      withCredentials: true,
+    })
       .then(response => {
         // extract the data from the server response body
         setResponse(response.data)

@@ -4,50 +4,79 @@ This repository contains a client app built with React and a server app built wi
 
 The front-end and back-end code together show how to use simple Cookie and LocalStorage technologies - data storage tools available within the web browser.
 
-I hope to add examples of server-side storage later...
+We also show how to deal with login and authorization using JWT.
 
 ## Run the front-end
 
 Navigate into the `front-end` directory and...
 
-Install dependencies:
+### Setup environmental variables
+
+Copy the file named `.env.example` into a new file named simply, `.env`.
+
+Make sure the `REACT_APP_BACKEND` setting in this file specifies the correct domain and port where the Express back-end app is running.
+
+```javascript
+REACT_APP_BACKEND=http://localhost:3000
+```
+
+Note that the React server will have to be completely stopped and re-started if you change these variables while it is running.
+
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-Start the front-end app:
+### Start the front-end app
 
 ```bash
 npm start
 ```
 
-Note the port that the React app starts on.
+Note the port that the React app starts on... you'll need this in setting up environmental variables for the back-end.
 
 ## Run the back-end
 
 Navigate into the `back-end` directory and...
 
-In the file named `app.js`, modify the following line to match the port number where your front-end is running:
+### Setup environmental variables
+
+Copy the file named `.env.example` into a new file named simply, `.env`.
+
+Make sure the `FRONTEND_DOMAIN` setting in this file specifies the correct domain and port where the React front-end app is running.
 
 ```javascript
-app.use(cors({ origin: "http://localhost:3002", credentials: true })) // allow incoming requests only from a "trusted" host
+FRONT_END_DOMAIN=http://localhost:3001
 ```
 
-Install dependencies:
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-Install `nodemon` globally:
+### Install nodemon
+
+Use the `-g` flag to install nodemon globally:
 
 ```bash
 npm install -g nodemon
 ```
+
+### Start the back-end app
 
 Start the express server using `nodemon`:
 
 ```bash
 nodemon server
 ```
+
+## Try it out
+
+### Front-end
+
+Open the front-end in your favorite web browser (most likely this will have popped open automatically). Open the browser's `Developer Tools`:
+
+- use the `Console` tab to see any debugging output from the Javascript code running in the browser.
+- use the `Network` tab to see details of all HTTP requests and responses to/from the back-end server. In particular, look at the cookie and authorization-related HTTP headers.
