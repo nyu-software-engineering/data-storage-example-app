@@ -15,7 +15,7 @@ jobs:
       - run: echo "this is the build job"
       - run: pwd # for debugging: show current working directory
       - run: ls # for debugging: show sub-directories in here
-      - run: cd data-storage-example-app/back-end # navigate into the express app directory
+      - run: cd back-end # navigate into the express app directory
       - run: npm install # install all dependencies listed in package.json
   test-back-end:
     docker:
@@ -28,7 +28,7 @@ jobs:
       - run: echo "this is the test job"
       - run: pwd # for debugging: show current working directory
       - run: ls # for debugging: show sub-directories in here
-      - run: cd data-storage-example-app/back-end # navigate into the express app directory
+      - run: cd back-end # navigate into the express app directory
       - run: npm install # install all dependencies listed in package.json
       - run: npm test # run all unit tests
 
