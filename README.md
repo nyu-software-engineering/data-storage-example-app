@@ -86,3 +86,19 @@ Open the front-end in your favorite web browser (most likely this will have popp
 ### Back-end
 
 Watch the debugging output on the back-end to show incoming requests and their response codes.
+
+## Test it
+
+Unit tests built with [mocha](https://mochajs.org/) and the [chai](https://www.chaijs.com/) assertion library (with the [chai-http](https://www.chaijs.com/plugins/chai-http/) plugin to simplify testing back-end routes) are included for the back-end. Code coverage analysis is provided by the `nyc` module. The `package.json` file contains scripts to run both.
+
+Run unit tests:
+
+```bash
+npx mocha
+```
+
+Run code coverage:
+
+```bash
+npm run coverage
+```

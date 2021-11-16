@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "test-better": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000 --exit",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000 --exit",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Foo Barstein",
   "license": "GPL-3.0-or-later",

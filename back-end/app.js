@@ -21,7 +21,8 @@ const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup o
 passport.use(jwtStrategy)
 
 // set up some useful middleware
-app.use(morgan("dev")) // log all incoming requests.  morgan has a few logging default styles - dev is a nice concise color-coded style
+app.use(morgan("dev", { skip: (req, res) => process.env.NODE_ENV === "test" })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
+
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
@@ -79,7 +80,7 @@ app.post("/login", function (req, res) {
   // brab the name and password that were submitted as POST body data
   const username = req.body.username
   const password = req.body.password
-  console.log(`${username}, ${password}`)
+  // console.log(`${username}, ${password}`)
   if (!username || !password) {
     // no username or password received in the POST body... send an error
     res
@@ -98,7 +99,7 @@ app.post("/login", function (req, res) {
 
   // assuming we found the user, check the password is correct
   // we would normally encrypt the password the user submitted to check it against an encrypted copy of the user's password we keep in the database... but here we just compare two plain text versions for simplicity
-  if (req.body.password == user.password) {
+  else if (req.body.password == user.password) {
     // the password the user entered matches the password in our "database" (mock data in this case)
     // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
     const payload = { id: user.id } // some data we'll encode into the token
@@ -111,7 +112,8 @@ app.post("/login", function (req, res) {
 })
 
 // a route to handle logging out users
-app.post("/logout", function (req, res) {
+app.get("/logout", function (req, res) {
+  // nothing really to do here... logging out with JWT authentication is handled entirely by the front-end by deleting the token from the browser's memory
   res.json({
     success: true,
     message:

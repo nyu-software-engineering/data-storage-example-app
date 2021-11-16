@@ -1,5 +1,6 @@
 // set the app NODE_ENV environment variable to 'test' in case the app is set up to alter its behavior in such case
-// process.env.NODE_ENV = "test"
+// in our case, the morgan logging module is turned off when this is set to 'test'
+process.env.NODE_ENV = "test"
 
 // include the testing dependencies
 const chai = require("chai")
@@ -13,14 +14,8 @@ const server = require("../app")
 
 // a group of tests related to the /protected route
 describe("Protected", () => {
-  beforeEach(done => {
-    // here we can write any code we want run before each test starts
-
-    done() // tell the test fromework we're done with this setup and it will move on
-  })
-
   /**
-   * test the GET /protected route when not logged in
+   * test the GET /protected route
    */
   describe("GET /protected when not logged in", () => {
     // test a protected route when not logged in... passport auth should send back a 401 HTTP error
@@ -53,9 +48,6 @@ describe("Protected", () => {
         .set("Authorization", `JWT ${token}`) // set JWT authentication headers to simulate a logged-in user, using the token we created at top
         .end((err, res) => {
           res.should.have.status(200) // use should to make BDD-style assertions
-          res.body.should.be.a("object") // our route sends back an object
-          res.body.should.have.property("success")
-          res.body.should.have.property("user")
           done() // resolve the Promise that these tests create so mocha can move on
         })
     })
