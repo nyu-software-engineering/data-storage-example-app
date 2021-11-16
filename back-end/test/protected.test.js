@@ -65,7 +65,7 @@ describe("Protected", () => {
         .request(server)
         .get("/protected")
         .set("Authorization", `JWT ${token}`) // set JWT authentication headers to simulate a logged-in user, using the token we created at top
-        .end(;(err, res) => {
+        .end((err, res) => {
           res.body.should.be.a("object") // our route sends back an object
           // res.body.should.have.property("success")
           // res.body.should.have.property("user")
