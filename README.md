@@ -1,6 +1,6 @@
 # Data Storage Example App
 
-[![CircleCI](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master.svg?style=svg)](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master)
+[![CircleCI](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master.svg?style=shielf)](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master)
 
 This repository contains a client app built with React and a server app built with Express.js.
 
