@@ -25,7 +25,7 @@ const Protected = props => {
         )
         setIsLoggedIn(false) // update this state variable, so the component re-renders
       })
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

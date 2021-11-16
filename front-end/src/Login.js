@@ -16,7 +16,7 @@ const Login = props => {
     const qsError = urlSearchParams.get("error") // get any 'error' field in the URL query string
     if (qsError === "protected")
       setErrorMessage("Please log in to view our fabulous protected content.")
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // if the user's logged-in status changes, save the token we receive from the server
   useEffect(() => {
