@@ -13,6 +13,7 @@ jobs:
     steps:
       - checkout
       - run: echo "this is the build job"
+      - run: pwd
       - run: cd back-end # navigate into the express app directory
       - run: npm install # install all dependencies listed in package.json
   test-back-end:
@@ -24,6 +25,7 @@ jobs:
     steps:
       - checkout
       - run: echo "this is the test job"
+      - run: pwd
       - run: cd back-end # navigate into the express app directory
       - run: npm install # install all dependencies listed in package.json
       - run: npm test # run all unit tests
