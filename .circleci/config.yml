@@ -2,25 +2,35 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+# Define the jobs we want to run for this project
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+  build-back-end:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+      - image: cimg/node:16.13.0 # latest stable node at the time of writing
+        # auth:
+        #   username: mydockerhub-user
+        #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+      - run: echo "this is the build job"
+      - run: cd back-end # navigate into the express app directory
+      - run: npm install # install all dependencies listed in package.json
+  test-back-end:
+    docker:
+      - image: cimg/node:16.13.0 # latest stable node at the time of writing
+        # auth:
+        #   username: mydockerhub-user
+        #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+      - run: cd back-end # navigate into the express app directory
+      - run: npm install # install all dependencies listed in package.json
+      - run: npm test # run all unit tests
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+# Orchestrate our job run sequence
 workflows:
-  say-hello-workflow:
+  build-and-test-express:
     jobs:
-      - say-hello
+      - build-back-end
+      - test-back-end
