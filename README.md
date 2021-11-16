@@ -1,5 +1,7 @@
 # Data Storage Example App
 
+[![CircleCI](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master.svg?style=svg)](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master)
+
 This repository contains a client app built with React and a server app built with Express.js.
 
 The front-end and back-end code together show how to use simple Cookie and LocalStorage technologies - data storage tools available within the web browser.
