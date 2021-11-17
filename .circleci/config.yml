@@ -10,39 +10,36 @@ jobs:
         # auth:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /back-end
     steps:
       - checkout
       - run: echo "this is the build back-end job"
       - run: pwd # for debugging: show current working directory
       - run: ls # for debugging: show sub-directories in here
-      - run: npm install # install all dependencies listed in package.json
+      - run: cd back-end && npm install # install all dependencies listed in package.json
   test-back-end:
     docker:
       - image: cimg/node:16.13.0 # latest stable node at the time of writing
         # auth:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /back-end
     steps:
       - checkout
       - run: echo "this is the test back-end job"
       - run: pwd # for debugging: show current working directory
       - run: ls # for debugging: show sub-directories in here
-      - run: npm install # install all dependencies listed in package.json
-      - run: npm test # run all unit tests
+      - run: cd back-end && npm install # install all dependencies listed in package.json
+      - run: cd back-end && npm test # run all unit tests
   build-front-end:
     docker:
       - image: cimg/node:16.13.0 # latest stable node at the time of writing
         # auth:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: /front-end
     steps:
       - checkout
       - run: echo "this is the build front-end job"
-      - run: npm install # install all dependencies listed in package.json
-      - run: npm run build # install all dependencies listed in package.json
+      - run: cd front-end && npm install # install all dependencies listed in package.json
+      - run: cd front-end && npm install && npm run build # install all dependencies listed in package.json
 
 # Orchestrate our job run sequence
 workflows:
