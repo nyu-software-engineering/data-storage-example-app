@@ -37,7 +37,7 @@ jobs:
         # auth:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working-directory: /front-end
+    working_directory: /front-end
     steps:
       - checkout
       - run: echo "this is the build front-end job"
