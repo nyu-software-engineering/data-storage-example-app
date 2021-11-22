@@ -4,9 +4,9 @@
 
 This repository contains a client app built with React and a server app built with Express.js.
 
-The front-end and back-end code together show how to use simple Cookie and LocalStorage technologies - data storage tools available within the web browser.
+The front-end and back-end code together show how to use simple Cookie and LocalStorage technologies - data storage tools available within the web browser. We also show how to deal with login and authorization using JWT.
 
-We also show how to deal with login and authorization using JWT.
+Both the front-end and back-end are optionally containerized using Docker.
 
 ## Run the front-end
 
@@ -37,6 +37,18 @@ npm start
 ```
 
 Note the port that the React app starts on... you'll need this in setting up environmental variables for the back-end.
+
+### Start the front-end app as a container
+
+Alternatively, the front-end can be started as a Docker container.
+
+First, make sure Docker has been installed locally, and then run:
+
+```bash
+docker run -p 4000:4000 -d bloombar/data-storage-example-app-front-end
+```
+
+The containerized front-end app should now be running as a background daemon on `http://localhost:4000`.
 
 ## Run the back-end
 
@@ -74,11 +86,23 @@ Start the express server using `nodemon`:
 nodemon server
 ```
 
+### Start the front-end app as a container
+
+Alternatively, the back-end can be started as a Docker container.
+
+First, make sure Docker has been installed locally, and then run:
+
+```bash
+docker run -p 3000:3000 --restart unless-stopped -d bloombar/data-storage-example-app-back-end
+```
+
+The containerized back-end app should now be running as a background daemon on `http://localhost:3000`.
+
 ## Try it out
 
 ### Front-end
 
-Open the front-end in your favorite web browser (most likely this will have popped open automatically). Open the browser's `Developer Tools`:
+Open the front-end (`http://localhost:4000`) in your favorite web browser (this should have popped open automatically, unless running the containerized version of the app). Open the browser's `Developer Tools`:
 
 - use the `Console` tab to see any debugging output from the Javascript code running in the browser.
 - use the `Network` tab to see details of all HTTP requests and responses to/from the back-end server. In particular, look at the cookie and authorization-related HTTP headers.
