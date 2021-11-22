@@ -1,14 +1,11 @@
 # start from the node v16 base image
 FROM node:16
 
-# # create an app directory within the image
-# WORKDIR /usr/src/app
+# create an app directory within the image... if doing this, just make sure your other Dockerfile commands reference this directory
+# WORKDIR /app
 
-# copy app source code into image
+# copy app source code into the default directory within the image
 COPY . .
-
-# copy package.json and package-lock.json from our local machine into the image
-# COPY package*.json ./
 
 # install dependencies into the image
 RUN npm install
