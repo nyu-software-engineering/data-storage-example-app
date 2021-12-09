@@ -11,7 +11,7 @@ jobs:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
+      - checkout # clone from github repo
       - run: echo "this is the build and test express.js job"
       - run: |
           cd back-end
@@ -28,16 +28,25 @@ jobs:
         #   username: mydockerhub-user
         #   password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
+      - checkout # clone from github repo
       - run: echo "this is the build react.js job"
       - run: |
-          cd back-end
+          cd front-end
           pwd # for debugging: show current working directory
           ls # for debugging: show sub-directories in here
       - run: |
           cd front-end
           npm install # install all dependencies listed in package.json
+          export CI=false # most continuous integration servers will fail builds on simple warnings... disable this feature and make this environemt variable available to subprocesses by exporting it
           npm run build # have react build the stand-alone front-end code
+  deploy-to-production-server:
+    # see a tutorial about deploying (note it uses an Ubuntu server) at https://www.digitalocean.com/community/tutorials/how-to-automate-deployment-using-circleci-and-github-on-ubuntu-18-04
+    docker:
+      - image: cimg/node:16.13.0 # latest stable node at the time of writing
+    steps:
+      - checkout # clone from github repo
+      - run: echo "deploying to production server... hopefully, you have set up the required SERVER_USERNAME, SERVER_IP_ADDRESS environmental variables and SSH keys in the CD server settings and SSH keys in GitHub!"
+      - run: ssh -oStrictHostKeyChecking=no -v $SERVER_USERNAME@$SERVER_IP_ADDRESS "pwd && ls && ./deploy.sh" # assumes you have created a circleci user account which doesn't require a password on ther server and placed a deploy.sh bash script into its home directory
 
 # Orchestrate our job run sequence
 workflows:
@@ -47,3 +56,23 @@ workflows:
   build-front-end:
     jobs:
       - build-react-js
+  # deploy:
+  #   jobs:
+  #     - build-and-test-express-js
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master # only test back-end when the master branch is updated
+  #     - build-react-js
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master # only build front-end when the master branch is updated
+  #     - deploy-to-production-server:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master # only deploy when the master branch is updated
+  #         requires: # deployment depends upon successful completion of these jobs:
+  #           - build-and-test-express-js
+  #           - build-react-js
