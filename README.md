@@ -61,7 +61,7 @@ Navigate into the `back-end` directory and...
 
 Copy the file named `.env.example` into a new file named simply, `.env`.
 
-Make sure the `FRONTEND_DOMAIN` setting in this file specifies the correct domain and port where the React front-end app is running.
+Make sure the `FRONT_END_DOMAIN` setting in this file specifies the correct domain and port where the React front-end app is running.
 
 ```javascript
 FRONT_END_DOMAIN=http://localhost:3001
