@@ -2,8 +2,8 @@
 
 <!-- [![CircleCI](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master.svg?style=shield)](https://circleci.com/gh/nyu-software-engineering/data-storage-example-app/tree/master) -->
 
-![Back-end tests](https://github.com/nyu-software-engineering/data-storage-example-app/actions/workflows/build-back.yaml/badge.svg)
-![Front-end tests](https://github.com/nyu-software-engineering/data-storage-example-app/actions/workflows/build-front.yaml/badge.svg)
+![Back-end badge](https://github.com/nyu-software-engineering/data-storage-example-app/actions/workflows/build-back.yaml/badge.svg)
+![Front-end badge](https://github.com/nyu-software-engineering/data-storage-example-app/actions/workflows/build-front.yaml/badge.svg)
 
 This repository contains a client app built with React and a server app built with Express.js.
 

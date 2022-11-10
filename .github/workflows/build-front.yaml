@@ -1,4 +1,4 @@
-name: Build & test front-end
+name: Front-end build
 on:
   pull_request:
     branches: [main, master]

@@ -1,4 +1,4 @@
-name: Build & test back-end
+name: Back-end build
 on:
   push:
     branches: [main, master]
