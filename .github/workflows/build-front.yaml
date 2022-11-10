@@ -1,14 +1,20 @@
 name: Front-end build
+
 on:
-  pull_request:
+  push:
     branches: [main, master]
+
+env:
+  PORT: ${{ secrets.PORT }}
+  REACT_APP_BACKEND: ${{ secrets.REACT_APP_BACKEND }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 15.x]
+        node-version: [12.x, 15.x]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Node.js ${{ matrix.node-version }}
