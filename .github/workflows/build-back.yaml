@@ -22,4 +22,5 @@ jobs:
           npm run build --if-present
       - name: Run tests
         run: |
+          cd back-end
           npm test
