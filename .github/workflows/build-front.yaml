@@ -34,6 +34,9 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: Enter front-end directory
+        run: |
+          cd front-end
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
