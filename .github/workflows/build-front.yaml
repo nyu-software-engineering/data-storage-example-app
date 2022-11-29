@@ -48,4 +48,4 @@ jobs:
         with:
           context: "{{defaultContext}}:front-end"
           push: true
-          tags: user/app:latest
+          tags: bloombar/data-storage-example-app-back-end:latest
