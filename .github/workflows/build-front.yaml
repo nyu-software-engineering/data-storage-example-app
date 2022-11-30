@@ -49,4 +49,4 @@ jobs:
           context: "{{defaultContext}}:front-end"
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: bloombar/data-storage-example-app-back-end:latest
+          tags: bloombar/data-storage-example-app-front-end:latest
