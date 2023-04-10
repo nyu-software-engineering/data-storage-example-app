@@ -41,6 +41,10 @@ npm start
 
 Note the port that the React app starts on... you'll need this in setting up environmental variables for the back-end.
 
+#### Potential OpenSSL error
+
+Depending on your version of Node.js, you may see an error mentioning something about "digital envelop routines" when running `npm start`. This error can be resolved by setting an environment variable to support legacy OpenSSL providers prior to running `npm start`. See [this discussion](https://stackoverflow.com/questions/74726224/opensslerrorstack-error03000086digital-envelope-routinesinitialization-e) for details.
+
 ### Start the front-end app as a container
 
 Alternatively, the front-end can be started as a Docker container.
