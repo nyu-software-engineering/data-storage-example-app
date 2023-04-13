@@ -13,7 +13,7 @@ const Protected = props => {
   useEffect(() => {
     // send the request to the server api, including the Authorization header with our JWT token in it
     axios
-      .get(`${process.env.REACT_APP_BACKEND}/protected`, {
+      .get(`${process.env.REACT_APP_BACKEND}/protected/`, {
         headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
       })
       .then(res => {

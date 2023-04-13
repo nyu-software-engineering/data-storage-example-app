@@ -11,6 +11,19 @@ The front-end and back-end code together show how to use simple Cookie and Local
 
 Both the front-end and back-end are optionally containerized using Docker.
 
+## Run the database
+
+To quickly set up a MongoDB database for use with this app, we use [Docker](https://www.docker.com), which must be
+
+- install and run [docker desktop](https://www.docker.com/get-started)
+- create a [dockerhub](https://hub.docker.com/signup) account
+
+Start up a MongoDB database:
+
+- run command, `docker run --name mongodb_dockerhub -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=secret -d mongo:latest`
+
+You now have a MongoDB database running on `localhost` port `27017`, with an `admin` user account with password, `password`
+
 ## Run the front-end
 
 Navigate into the `front-end` directory and...

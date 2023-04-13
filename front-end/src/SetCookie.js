@@ -11,7 +11,7 @@ const SetCookie = props => {
   // the following side-effect will be called once upon initial render
   useEffect(() => {
     // make a request to a route on the express server that sets a cookie in the browser
-    axios(`${process.env.REACT_APP_BACKEND}/set-cookie`, {
+    axios(`${process.env.REACT_APP_BACKEND}/cookie/set`, {
       withCredentials: true,
     })
       .then(response => {
