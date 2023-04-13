@@ -17,11 +17,11 @@ describe("Logout", () => {
   /**
    * test the GET /logout route
    */
-  describe("GET /logout", () => {
+  describe("GET /auth/logout", () => {
     it("it should return a 200 HTTP response code", done => {
       chai
         .request(server)
-        .get("/logout")
+        .get("/auth/logout")
         .end((err, res) => {
           res.should.have.status(200) // use 'should' to make BDD-style assertions
           done() // resolve the Promise that these tests create so mocha can move on
@@ -33,7 +33,7 @@ describe("Logout", () => {
       // nevertheless, including this for example
       chai
         .request(server)
-        .get("/logout")
+        .get("/auth/logout")
         .end((err, res) => {
           res.body.should.be.a("object") // our route sends back an object
           res.body.should.have.property("success", true)

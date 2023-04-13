@@ -38,8 +38,9 @@ describe("Protected", () => {
 
     // let's first create a valid JWT token to use in the requests where we want to be logged in
     const jwt = require("jsonwebtoken")
-    const { jwtOptions, jwtStrategy } = require("../jwt-config.js") // import setup options for using JWT in passport
-    const token = jwt.sign({ id: 1 }, process.env.JWT_SECRET) // create a signed token simulating user #1
+    const User = require("../models/User")
+    const user = new User({ username: "test", password: "test" })
+    const token = user.generateJWT()
 
     it("it should return a 200 HTTP response code", done => {
       chai

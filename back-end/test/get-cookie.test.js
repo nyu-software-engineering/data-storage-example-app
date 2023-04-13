@@ -18,11 +18,11 @@ describe("Get cookie", () => {
    * test the GET /get-cookie route
    */
   const cookieData = "foo=bar" // mock cookie data
-  describe("GET /get-cookie with Cookies in request", () => {
+  describe("GET /cookie/get with Cookies in request", () => {
     it("it should return a 200 HTTP response code", done => {
       chai
         .request(server)
-        .get("/get-cookie")
+        .get("/cookie/get")
         .set("Cookie", cookieData) // set a cookie header with a valid cookie key/value pair our server is expecting
         .end((err, res) => {
           res.should.have.status(200) // use 'should' to make BDD-style assertions
@@ -33,7 +33,7 @@ describe("Get cookie", () => {
     it("it should return an object with specific properties", done => {
       chai
         .request(server)
-        .get("/get-cookie")
+        .get("/cookie/get")
         .set("Cookie", cookieData) // set a cookie header with a valid cookie key/value pair our server is expecting
         .end((err, res) => {
           res.body.should.be.a("object") // our route sends back an object

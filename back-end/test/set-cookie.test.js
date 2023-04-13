@@ -18,11 +18,11 @@ describe("Set cookie", () => {
    * test the GET /set-cookie route
    */
   const cookieData = "foo=bar" // mock cookie data
-  describe("GET /set-cookie", () => {
+  describe("GET /cookie/set", () => {
     it("it should return a 200 HTTP response code", done => {
       chai
         .request(server)
-        .get("/set-cookie")
+        .get("/cookie/set")
         .end((err, res) => {
           res.should.have.status(200) // use 'should' to make BDD-style assertions
           done() // resolve the Promise that these tests create so mocha can move on
@@ -34,7 +34,7 @@ describe("Set cookie", () => {
       // nevertheless, including this for example
       chai
         .request(server)
-        .get("/set-cookie")
+        .get("/cookie/set")
         .end((err, res) => {
           res.body.should.be.a("object") // our route sends back an object
           res.body.should.have.keys("success", "message") // a way to test the presence of an exact set of keys in the response object
@@ -47,7 +47,7 @@ describe("Set cookie", () => {
       // nevertheless, including this for example
       chai
         .request(server)
-        .get("/set-cookie")
+        .get("/cookie/set")
         .end((err, res) => {
           const [expectedKey, expectedValue] = cookieData.split("=") // get the expected cookie key/value pair
           expect(res).to.have.cookie(expectedKey, expectedValue) // check for expected cookie header key/value pair

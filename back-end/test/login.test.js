@@ -18,11 +18,11 @@ describe("Login", () => {
    * test the POST /login route
    */
   const formData = { username: "bla", password: "wrong" } // mock form data with incorrect credentials
-  describe("POST /login with incorrect username/password", () => {
+  describe("POST /auth/login with incorrect username/password", () => {
     it("it should return a 401 HTTP response code", done => {
       chai
         .request(server)
-        .post("/login")
+        .post("/auth/login")
         .type("form")
         .send(formData)
         .end((err, res) => {
@@ -32,12 +32,12 @@ describe("Login", () => {
     })
   })
 
-  describe("POST /login with correct username/password", () => {
+  describe("POST /auth/login with correct username/password", () => {
     const formData = { username: "foo", password: "bar" } // mock form data with correct credentials
     it("it should return a 200 HTTP response code", done => {
       chai
         .request(server)
-        .post("/login")
+        .post("/auth/login")
         .type("form")
         .send(formData)
         .end((err, res) => {

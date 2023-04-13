@@ -66,20 +66,18 @@ const authenticationRouter = () => {
       const user = await User.findOne({ username: username }).exec()
       // check if user was found
       if (!user) {
-        console.error(`User not found: ${err}`)
-        res.status(500).json({
+        console.error(`User not found.`)
+        return res.status(401).json({
           success: false,
           message: "User not found in database.",
-          error: err,
         })
       }
       // if user exists, check if password is correct
-      if (!user.validPassword(password)) {
-        console.error(`Incorrect password: ${err}`)
-        res.status(500).json({
+      else if (!user.validPassword(password)) {
+        console.error(`Incorrect password.`)
+        return res.status(401).json({
           success: false,
           message: "Incorrect password.",
-          error: err,
         })
       }
       // user found and password is correct... send a success response
@@ -94,7 +92,7 @@ const authenticationRouter = () => {
     } catch (err) {
       // check error
       console.error(`Error looking up user: ${err}`)
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         message: "Error looking up user in database.",
         error: err,
