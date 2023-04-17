@@ -17,6 +17,13 @@ let jwtOptions = {
 const jwtVerifyToken = async function (jwt_payload, next) {
   // console.log("JWT payload received", jwt_payload) // debugging
 
+  // check if the token has expired
+  const expirationDate = new Date(jwt_payload.exp * 1000) // convert from seconds to milliseconds
+  if (expirationDate < new Date()) {
+    // the token has expired
+    return next(null, false, { message: "JWT token has expired." })
+  }
+
   // try to find a matching user in our database
 
   // find this user in the database
@@ -27,7 +34,7 @@ const jwtVerifyToken = async function (jwt_payload, next) {
     next(null, user)
   } else {
     // we didn't find the user... fail!
-    next(null, false)
+    next(null, false, { message: "User not found" })
   }
 }
 

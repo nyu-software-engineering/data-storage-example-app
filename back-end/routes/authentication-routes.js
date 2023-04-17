@@ -49,7 +49,7 @@ const authenticationRouter = () => {
 
   // a route to handle login attempts requested to /auth/login
   router.post("/login", async function (req, res) {
-    // brab the name and password that were submitted as POST body data
+    // grab the name and password that were submitted as POST body data
     const username = req.body.username
     const password = req.body.password
     // console.log(`${username}, ${password}`)

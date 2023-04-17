@@ -22,6 +22,7 @@ const UserSchema = new Schema({
 // mongoose provides hooks that allow us to run code before or after specific events
 UserSchema.pre("save", function (next) {
   const user = this
+  // if the password has not changed, no need to hash it
   if (!user.isModified("password")) return next()
   // otherwise, the password is being modified, so hash it
   bcrypt.hash(user.password, 10, (err, hash) => {
