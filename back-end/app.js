@@ -8,7 +8,6 @@ const cookieParser = require("cookie-parser") // middleware useful for parsing c
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 
 // the following are used for authentication with JSON Web Tokens
-const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
 const jwt = require("jsonwebtoken")
 const passport = require("passport")
 

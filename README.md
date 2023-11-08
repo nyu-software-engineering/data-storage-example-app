@@ -34,7 +34,7 @@ Copy the file named `.env.example` into a new file named simply, `.env`.
 
 Make sure the `REACT_APP_BACKEND` setting in this file specifies the correct domain and port where the Express back-end app is running.
 
-```javascript
+```js
 REACT_APP_BACKEND=http://localhost:3000
 ```
 
@@ -80,7 +80,7 @@ Copy the file named `.env.example` into a new file named simply, `.env`.
 
 Make sure the `FRONT_END_DOMAIN` setting in this file specifies the correct domain and port where the React front-end app is running.
 
-```javascript
+```js
 FRONT_END_DOMAIN=http://localhost:3001
 ```
 

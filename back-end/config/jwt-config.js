@@ -15,7 +15,7 @@ let jwtOptions = {
 
 // define the method that is used by passport to verify the contents (i.e. the payload) of the JWT token
 const jwtVerifyToken = async function (jwt_payload, next) {
-  // console.log("JWT payload received", jwt_payload) // debugging
+  console.log("JWT payload received", jwt_payload) // debugging
 
   // check if the token has expired
   const expirationDate = new Date(jwt_payload.exp * 1000) // convert from seconds to milliseconds
