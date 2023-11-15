@@ -4,7 +4,7 @@
   "description": "Example of a few data storage techniques on the back-end web server",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --timeout 2000",
     "coverage": "nyc --reporter=html --reporter=text --reporter=lcov --reporter=clover mocha --timeout 10000 --exit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
