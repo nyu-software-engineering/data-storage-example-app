@@ -7,6 +7,8 @@ on:
 env:
   FRONT_END_DOMAIN: ${{ secrets.FRONT_END_DOMAIN }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  JWT_EXP_DAYS: ${{ secrets.JWT_EXP_DAYS }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
 jobs:
   build:
