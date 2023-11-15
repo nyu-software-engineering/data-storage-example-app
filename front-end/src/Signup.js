@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 // import logo from './logo.svg';
 import "./Login.css";
 
 const Signup = props => {
-  // let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
-
   // create state variables to hold username and password
   const [response, setResponse] = useState({}); // the API will return an object with a JWT token, if the user logs in successfully
   const [errorMessage, setErrorMessage] = useState("");
