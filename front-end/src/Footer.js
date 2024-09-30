@@ -1,11 +1,13 @@
-import "./Footer.css"
+import "./Footer.css";
 
-const Footer = props => {
+const Footer = (props) => {
+  const year = new Date().getFullYear();
+
   return (
     <footer>
-      <p>&copy; 2021. All rights reserved.</p>
+      <p>&copy; {year}. All rights reserved.</p>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
