@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios"
-import Cookies from "js-cookie" // a useful module for handling cookies in the browser
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import Cookies from 'js-cookie' // a useful module for handling cookies in the browser
 
 const SetCookie = props => {
   // start a state varaible with a blank object... this will be replaced with the data sent by the server in the response body
@@ -58,7 +58,7 @@ const SetCookie = props => {
           <p>
             To debug, pop open your Browser's Developer Tools, open the Network
             tab, and reload any page of the app - if you inspect the Request
-            Headers, you will see that the client is sending a{" "}
+            Headers, you will see that the client is sending a{' '}
             <code>Cookie</code> header with every subsequent request.
           </p>
         </>

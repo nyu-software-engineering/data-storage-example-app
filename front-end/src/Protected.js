@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { Navigate } from "react-router-dom"
-import axios from "axios"
+import React, { useState, useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Protected = props => {
-  const jwtToken = localStorage.getItem("token") // the JWT token, if we have already received one and stored it in localStorage
+  const jwtToken = localStorage.getItem('token') // the JWT token, if we have already received one and stored it in localStorage
   console.log(`JWT token: ${jwtToken}`) // debugging
 
   const [response, setResponse] = useState({}) // we expect the server to send us a simple object in this case
@@ -21,7 +21,7 @@ const Protected = props => {
       })
       .catch(err => {
         console.log(
-          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+          'The server rejected the request for this protected resource... we probably do not have a valid JWT token.'
         )
         setIsLoggedIn(false) // update this state variable, so the component re-renders
       })

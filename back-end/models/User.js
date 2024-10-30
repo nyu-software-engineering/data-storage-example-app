@@ -1,9 +1,9 @@
 // a mongoose model of a user
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const jwtStrategy = require("../config/jwt-config.js") // import setup options for using JWT in passport
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const jwtStrategy = require('../config/jwt-config.js') // import setup options for using JWT in passport
 
 // this is our mongoose model for a user
 const UserSchema = new Schema({
@@ -20,10 +20,10 @@ const UserSchema = new Schema({
 
 // hash the password before the user is saved
 // mongoose provides hooks that allow us to run code before or after specific events
-UserSchema.pre("save", function (next) {
+UserSchema.pre('save', function (next) {
   const user = this
   // if the password has not changed, no need to hash it
-  if (!user.isModified("password")) return next()
+  if (!user.isModified('password')) return next()
   // otherwise, the password is being modified, so hash it
   bcrypt.hash(user.password, 10, (err, hash) => {
     if (err) return next(err)
@@ -64,7 +64,7 @@ UserSchema.methods.toAuthJSON = function () {
 }
 
 // create a model from this schema
-const User = mongoose.model("User", UserSchema)
+const User = mongoose.model('User', UserSchema)
 
 // export the model
 module.exports = User

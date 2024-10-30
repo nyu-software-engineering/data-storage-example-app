@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react"
-import { Link, Navigate, useSearchParams } from "react-router-dom"
-import axios from "axios"
+import React, { useState, useEffect } from 'react'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
+import axios from 'axios'
 // import logo from './logo.svg';
-import "./Login.css"
+import './Login.css'
 
 const Login = props => {
   let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
 
   // create state variables to hold username and password
   const [response, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState('')
 
   // if the user got here by trying to access our Protected page, there will be a query string parameter called 'error' with the value 'protected'
   useEffect(() => {
-    const qsError = urlSearchParams.get("error") // get any 'error' field in the URL query string
-    if (qsError === "protected")
-      setErrorMessage("Please log in to view our fabulous protected content.")
+    const qsError = urlSearchParams.get('error') // get any 'error' field in the URL query string
+    if (qsError === 'protected')
+      setErrorMessage('Please log in to view our fabulous protected content.')
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // if the user's logged-in status changes, save the token we receive from the server
@@ -23,7 +23,7 @@ const Login = props => {
     // if the user is logged-in, save the token to local storage
     if (response.success && response.token) {
       console.log(`User successfully logged in: ${response.username}`)
-      localStorage.setItem("token", response.token) // store the token into localStorage
+      localStorage.setItem('token', response.token) // store the token into localStorage
     }
   }, [response])
 
@@ -60,7 +60,7 @@ const Login = props => {
       <div className="Login">
         <h1>Log in</h1>
         <p>Authenticate yourself to access protected content!</p>
-        {errorMessage ? <p className="error">{errorMessage}</p> : ""}
+        {errorMessage ? <p className="error">{errorMessage}</p> : ''}
         <section className="main-content">
           <form onSubmit={handleSubmit}>
             {

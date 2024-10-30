@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios"
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const GetCookie = props => {
   // start a state varaible with a blank object... this will be replaced with the data sent by the server in the response body
@@ -43,7 +43,7 @@ const GetCookie = props => {
         </>
       ) : (
         <p>
-          No cookies have been received by the server. Try to{" "}
+          No cookies have been received by the server. Try to{' '}
           <Link to="/set-cookie">set a cookie first</Link>
         </p>
       )}
