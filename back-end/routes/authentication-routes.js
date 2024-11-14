@@ -10,7 +10,7 @@ const authenticationRouter = () => {
   const router = express.Router()
 
   // a route to handle user signup requests to /auth/signup
-  router.post('/signup', async (req, res, next) => {
+  router.post('/signup', async (req, res) => {
     // console.log(`Incoming signup data: ${JSON.stringify(req.body, null, 0)}`)
     // grab the username and password from the POST body
     const username = req.body.username
@@ -22,7 +22,7 @@ const authenticationRouter = () => {
         success: false,
         message: `No username or password supplied.`,
       })
-      next()
+      return
     }
 
     // try to create a new user
@@ -37,7 +37,7 @@ const authenticationRouter = () => {
         token: token,
         username: user.username,
       }) // send the token to the client to store
-      next()
+      return
     } catch (err) {
       // error saving user to database... send an error response
       console.error(`Failed to save user: ${err}`)
@@ -46,12 +46,12 @@ const authenticationRouter = () => {
         message: 'Error saving user to database.',
         error: err,
       })
-      next()
+      return
     }
   })
 
   // a route to handle login attempts requested to /auth/login
-  router.post('/login', async function (req, res, next) {
+  router.post('/login', async function (req, res) {
     // grab the name and password that were submitted as POST body data
     const username = req.body.username
     const password = req.body.password
@@ -62,7 +62,7 @@ const authenticationRouter = () => {
       res
         .status(401)
         .json({ success: false, message: `No username or password supplied.` })
-      next()
+      return
     }
 
     // find this user in the database
@@ -75,7 +75,7 @@ const authenticationRouter = () => {
           success: false,
           message: 'User not found in database.',
         })
-        next()
+        return
       }
       // if user exists, check if password is correct
       else if (!user.validPassword(password)) {
@@ -84,7 +84,7 @@ const authenticationRouter = () => {
           success: false,
           message: 'Incorrect password.',
         })
-        next()
+        return
       }
       // user found and password is correct... send a success response
       console.log('User logged in successfully.')
@@ -95,7 +95,7 @@ const authenticationRouter = () => {
         token: token,
         username: user.username,
       }) // send the token to the client to store
-      next()
+      return
     } catch (err) {
       // check error
       console.error(`Error looking up user: ${err}`)
@@ -104,19 +104,19 @@ const authenticationRouter = () => {
         message: 'Error looking up user in database.',
         error: err,
       })
-      next()
+      return
     }
   })
 
   // a route to handle logging out requests to /auth/logout
-  router.get('/logout', function (req, res, next) {
+  router.get('/logout', function (req, res) {
     // nothing really to do here... logging out with JWT authentication is handled entirely by the front-end by deleting the token from the browser's memory
     res.json({
       success: true,
       message:
         "There is actually nothing to do on the server side... you simply need to delete your token from the browser's local storage!",
     })
-    next()
+    return
   })
 
   return router

@@ -49,7 +49,7 @@ const Login = props => {
     } catch (err) {
       // request failed... user entered invalid credentials
       setErrorMessage(
-        "You entered invalid credentials.  Try harder!  Check out the usernames in the server's user_data.js file."
+        `You entered invalid credentials.  Try harder!  Check the documents in your database's users collection if you must... as developers, you can do that.`
       )
     }
   }
