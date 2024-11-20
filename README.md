@@ -86,8 +86,10 @@ Copy the file named `.env.example` into a new file named simply, `.env`.
 
 Make sure the `FRONT_END_DOMAIN` setting in this file specifies the correct domain and port where the React front-end app is running.
 
+e.g.
+
 ```js
-FRONT_END_DOMAIN=http://localhost:3001
+FRONT_END_DOMAIN=http://localhost:4000
 ```
 
 ### Install dependencies
@@ -128,7 +130,7 @@ The containerized back-end app should now be running as a background daemon on `
 
 ### Front-end
 
-Open the front-end (`http://localhost:4000`) in your favorite web browser (this should have popped open automatically, unless running the containerized version of the app). Open the browser's `Developer Tools`:
+Open the front-end (`http://localhost:4000` or whichever port React's dev server is runnong on) in your favorite web browser (this should have popped open automatically, unless running the containerized version of the app). Open the browser's `Developer Tools`:
 
 - use the `Console` tab to see any debugging output from the Javascript code running in the browser.
 - use the `Network` tab to see details of all HTTP requests and responses to/from the back-end server. In particular, look at the cookie and authorization-related HTTP headers.

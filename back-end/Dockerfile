@@ -2,10 +2,10 @@
 FROM node:16
 
 # create an app directory within the image... if doing this, just make sure your other Dockerfile commands reference this directory
-# WORKDIR /app
+WORKDIR /app
 
 # install dependencies into the image - doing this first will speed up subsequent builds, as Docker will cache this step
-COPY package*.json ./
+COPY package*.json .
 RUN npm install
 
 # copy the remaining app source code into the default directory within the image

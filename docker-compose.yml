@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: ds-mongo
+    ports:
+      - '27017:27017'
+    # volumes:
+    #   - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+
+  backend:
+    image: node:latest
+    container_name: ds-backend
+    working_dir: /app
+    # volumes:
+    #   - /data/backend:/app
+    ports:
+      - '3000:3000'
+    environment:
+      - FRONT_END_DOMAIN=http://localhost:4000
+      - JWT_SECRET=knowledge.kitchen
+      - JWT_EXP_DAYS=60
+      - MONGODB_URI=mongodb://admin:secret@localhost:27017/data-storage-app?authSource=admin
+    depends_on:
+      - mongo
+    command: sh -c "npm install && npm start"
+  frontend:
+    image: node:latest
+    container_name: ds-frontend
+    working_dir: /app
+    # volumes:
+    #   - /data/front-end:/app
+    environment:
+      - PORT=4000 # the port at which the react app will run
+      - REACT_APP_BACKEND=http://localhost:3000
+    ports:
+      - '4000:4000'
+    depends_on:
+      - backend
+    command: sh -c "npm install && npm start"
+# volumes:
+#   mongo-data:
