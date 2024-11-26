@@ -10,10 +10,15 @@ const expect = chai.expect // the assertion library in the style using the word 
 const should = chai.should() // the same assertion library in the style using the word 'should'
 
 // import the server
-const server = require('../app')
+const server = require('../server')
 
 // a group of tests related to the /logout route
 describe('Set cookie', () => {
+  // clean up by destroying the server when done
+  after(() => {
+    server.close()
+  })
+
   /**
    * test the GET /set-cookie route
    */
@@ -21,7 +26,7 @@ describe('Set cookie', () => {
   describe('GET /cookie/set', () => {
     it('it should return a 200 HTTP response code', done => {
       chai
-        .request(server)
+        .request(server.app)
         .get('/cookie/set')
         .end((err, res) => {
           res.should.have.status(200) // use 'should' to make BDD-style assertions
@@ -33,7 +38,7 @@ describe('Set cookie', () => {
       // logging out is really not a server-side issue when using JWT authentication
       // nevertheless, including this for example
       chai
-        .request(server)
+        .request(server.app)
         .get('/cookie/set')
         .end((err, res) => {
           res.body.should.be.a('object') // our route sends back an object
@@ -46,7 +51,7 @@ describe('Set cookie', () => {
       // logging out is really not a server-side issue when using JWT authentication
       // nevertheless, including this for example
       chai
-        .request(server)
+        .request(server.app)
         .get('/cookie/set')
         .end((err, res) => {
           const [expectedKey, expectedValue] = cookieData.split('=') // get the expected cookie key/value pair

@@ -10,11 +10,16 @@ const expect = chai.expect // the assertion library in the style using the word 
 const should = chai.should() // the same assertion library in the style using the word 'should'
 
 // import the server
-const server = require('../app')
+const server = require('../server')
 const User = require('../models/User')
 
 // a group of tests related to the /protected route
 describe('Login', () => {
+  // clean up by destroying the server when done
+  after(() => {
+    server.close()
+  })
+
   /**
    * test the POST /login route
    */
@@ -22,7 +27,7 @@ describe('Login', () => {
   describe('POST /auth/login with incorrect username/password', () => {
     it('it should return a 401 HTTP response code', done => {
       chai
-        .request(server)
+        .request(server.app)
         .post('/auth/login')
         .type('form')
         .send(formData)
@@ -56,7 +61,7 @@ describe('Login', () => {
 
     it('it should return a 200 HTTP response code', done => {
       chai
-        .request(server)
+        .request(server.app)
         .post('/auth/login')
         .type('form')
         .send(formData)

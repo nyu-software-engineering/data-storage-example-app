@@ -12,6 +12,8 @@ import Login from './Login'
 import Logout from './Logout'
 import Protected from './Protected'
 
+console.log(`Back-end assumed to be at ${process.env.REACT_APP_BACKEND}`)
+
 const App = props => {
   return (
     <div className="App">

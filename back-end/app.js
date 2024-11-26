@@ -7,6 +7,8 @@ const path = require('path')
 const cookieParser = require('cookie-parser') // middleware useful for parsing cookies in requests
 require('dotenv').config({ silent: true }) // load environmental variables from a hidden file named .env
 
+console.log(`Front-end assumed to be at ${process.env.FRONT_END_DOMAIN}`)
+
 // the following are used for authentication with JSON Web Tokens
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
@@ -23,7 +25,7 @@ const mongoose = require('mongoose')
 const User = require('./models/User.js')
 
 // connect to the database
-// console.log(`Conneting to MongoDB at ${process.env.MONGODB_URI}`)
+// console.log(`Connecting to MongoDB at ${process.env.MONGODB_URI}`)
 try {
   mongoose.connect(process.env.MONGODB_URI)
   console.log(`Connected to MongoDB.`)

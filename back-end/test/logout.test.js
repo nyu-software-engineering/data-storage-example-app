@@ -10,17 +10,22 @@ const expect = chai.expect // the assertion library in the style using the word 
 const should = chai.should() // the same assertion library in the style using the word 'should'
 
 // import the server
-const server = require('../app')
+const server = require('../server')
 
 // a group of tests related to the /logout route
 describe('Logout', () => {
+  // clean up by destroying the server when done
+  after(() => {
+    server.close()
+  })
+
   /**
    * test the GET /logout route
    */
   describe('GET /auth/logout', () => {
     it('it should return a 200 HTTP response code', done => {
       chai
-        .request(server)
+        .request(server.app)
         .get('/auth/logout')
         .end((err, res) => {
           res.should.have.status(200) // use 'should' to make BDD-style assertions
@@ -32,7 +37,7 @@ describe('Logout', () => {
       // logging out is really not a server-side issue when using JWT authentication
       // nevertheless, including this for example
       chai
-        .request(server)
+        .request(server.app)
         .get('/auth/logout')
         .end((err, res) => {
           res.body.should.be.a('object') // our route sends back an object

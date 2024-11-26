@@ -10,10 +10,15 @@ const expect = chai.expect // the assertion library in the style using the word 
 const should = chai.should() // the same assertion library in the style using the word 'should'
 
 // import the server
-const server = require('../app')
+const server = require('../server')
 
 // a group of tests related to the /protected route
 describe('Protected', () => {
+  // clean up by destroying the server when done
+  after(() => {
+    server.close()
+  })
+
   /**
    * test the GET /protected route
    */
@@ -21,7 +26,7 @@ describe('Protected', () => {
     // test a protected route when not logged in... passport auth should send back a 401 HTTP error
     it('it should return a 401 HTTP response code', done => {
       chai
-        .request(server)
+        .request(server.app)
         .get('/protected')
         .end((err, res) => {
           res.should.have.status(401) // use 'should' to make BDD-style assertions
@@ -65,7 +70,7 @@ describe('Protected', () => {
     it('it should return a 200 HTTP response code', done => {
       console.log(`DEBUG: running test`)
       chai
-        .request(server)
+        .request(server.app)
         .get('/protected')
         .set('Authorization', `JWT ${token}`) // set JWT authentication headers to simulate a logged-in user, using the token we created at top
         .end((err, res) => {
@@ -76,7 +81,7 @@ describe('Protected', () => {
 
     it('it should return an object with specific properties', done => {
       chai
-        .request(server)
+        .request(server.app)
         .get('/protected')
         .set('Authorization', `JWT ${token}`) // set JWT authentication headers to simulate a logged-in user, using the token we created at top
         .end((err, res) => {

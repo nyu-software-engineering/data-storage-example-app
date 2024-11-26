@@ -10,10 +10,15 @@ const expect = chai.expect // the assertion library in the style using the word 
 const should = chai.should() // the same assertion library in the style using the word 'should'
 
 // import the server
-const server = require('../app')
+const server = require('../server')
 
 // a group of tests related to the /logout route
 describe('Get cookie', () => {
+  // clean up by destroying the server when done
+  after(() => {
+    server.close()
+  })
+
   /**
    * test the GET /get-cookie route
    */
@@ -21,7 +26,7 @@ describe('Get cookie', () => {
   describe('GET /cookie/get with Cookies in request', () => {
     it('it should return a 200 HTTP response code', done => {
       chai
-        .request(server)
+        .request(server.app)
         .get('/cookie/get')
         .set('Cookie', cookieData) // set a cookie header with a valid cookie key/value pair our server is expecting
         .end((err, res) => {
@@ -32,7 +37,7 @@ describe('Get cookie', () => {
 
     it('it should return an object with specific properties', done => {
       chai
-        .request(server)
+        .request(server.app)
         .get('/cookie/get')
         .set('Cookie', cookieData) // set a cookie header with a valid cookie key/value pair our server is expecting
         .end((err, res) => {
