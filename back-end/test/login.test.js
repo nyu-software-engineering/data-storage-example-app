@@ -11,6 +11,7 @@ const should = chai.should() // the same assertion library in the style using th
 
 // import the server
 const server = require('../app')
+const User = require('../models/User')
 
 // a group of tests related to the /protected route
 describe('Login', () => {
@@ -33,7 +34,26 @@ describe('Login', () => {
   })
 
   describe('POST /auth/login with correct username/password', () => {
-    const formData = { username: 'foo', password: 'bar' } // mock form data with correct credentials
+    // establish a pseudo-random test username
+    let mockUserCredentials = {
+      username: `foo-${Math.random()}`, // randomish username
+      password: 'bar',
+    }
+    let mockUser
+
+    // create test user before tests
+    beforeEach(done => {
+      mockUser = new User(mockUserCredentials).save().then(() => done())
+    })
+
+    // delete test user after tests
+    afterEach(done => {
+      // delete the test user
+      User.remove({ _id: mockUser._id }).then(() => done())
+    })
+
+    const formData = mockUserCredentials // mock form data with correct credentials for test user
+
     it('it should return a 200 HTTP response code', done => {
       chai
         .request(server)

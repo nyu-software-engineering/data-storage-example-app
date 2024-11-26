@@ -39,10 +39,31 @@ describe('Protected', () => {
     // let's first create a valid JWT token to use in the requests where we want to be logged in
     const jwt = require('jsonwebtoken')
     const User = require('../models/User')
-    const user = new User({ username: 'test', password: 'test' })
-    const token = user.generateJWT()
+
+    // establish a pseudo-random test username
+    let mockUserCredentials = {
+      username: `foo-${Math.random()}`, // randomish username
+      password: 'bar',
+    }
+    let mockUser // will hold a test user
+    let token // will hold this user's JWT token
+
+    // create test user before tests
+    before(done => {
+      mockUser = new User(mockUserCredentials).save().then(user => {
+        token = user.generateJWT() // generate a valid token for testing
+        done()
+      })
+    })
+
+    // delete test user after tests
+    after(done => {
+      // delete the test user
+      User.remove({ _id: mockUser._id }).then(() => done())
+    })
 
     it('it should return a 200 HTTP response code', done => {
+      console.log(`DEBUG: running test`)
       chai
         .request(server)
         .get('/protected')
@@ -64,7 +85,7 @@ describe('Protected', () => {
           // res.body.should.have.property("user")
           // res.body.should.have.property("message")
           res.body.should.have.keys('success', 'user', 'message') // a way to test the presence of an exact set of keys in the response object
-          expect(res.body).to.have.deep.property('user.id', 1) // check for exact value of a nested value
+          expect(res.body).to.have.deep.property('user.id') // check for exact value of a nested value
           expect(res.body).to.have.deep.property('user.username') // check for existence of a nested value
 
           done() // resolve the Promise that these tests create so mocha can move on
