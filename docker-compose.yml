@@ -35,6 +35,7 @@ services:
     # volumes:
     #   - /data/front-end:/app
     environment:
+      - NODE_OPTIONS=--openssl-legacy-provider
       - PORT=4000 # the port at which the react app will run
       - REACT_APP_BACKEND=http://localhost:3000
     ports:
