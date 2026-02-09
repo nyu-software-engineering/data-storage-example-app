@@ -1,5 +1,5 @@
-const { useEffect } = require('react')
-const { Navigate } = require('react-router-dom')
+import { useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const Logout = props => {
   // when this component loads, log out the user

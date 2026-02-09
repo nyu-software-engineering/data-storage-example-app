@@ -12,7 +12,7 @@ import Login from './Login'
 import Logout from './Logout'
 import Protected from './Protected'
 
-console.log(`Back-end assumed to be at ${process.env.REACT_APP_BACKEND}`)
+console.log(`Back-end assumed to be at ${import.meta.env.VITE_BACKEND}`)
 
 const App = props => {
   return (

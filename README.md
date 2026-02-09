@@ -32,10 +32,10 @@ Navigate into the `front-end` directory and...
 
 Copy the file named `.env.example` into a new file named simply, `.env`.
 
-Make sure the `REACT_APP_BACKEND` setting in this file specifies the correct domain and port where the Express back-end app is running.
+Make sure the `VITE_BACKEND` setting in this file specifies the correct domain and port where the Express back-end app is running.
 
 ```js
-REACT_APP_BACKEND=http://localhost:3000
+VITE_BACKEND=http://localhost:3000
 ```
 
 Note that the React server will have to be completely stopped and re-started if you change these variables while it is running.
@@ -48,15 +48,17 @@ npm install
 
 ### Start the front-end app
 
+The following command will launch a development web server on your local machine:
+
 ```bash
-npm start
+npm run dev
 ```
 
 Note the port that the React app starts on... you'll need this in setting up environmental variables for the back-end.
 
 #### Potential OpenSSL error
 
-Depending on your version of Node.js, you may see an error mentioning something about "digital envelop routines" when running `npm start`. This error can be resolved by setting an environment variable to support legacy OpenSSL providers prior to running `npm start`. See [this discussion](https://stackoverflow.com/questions/74726224/opensslerrorstack-error03000086digital-envelope-routinesinitialization-e) for details.
+Depending on your version of Node.js, you may see an error mentioning something about "digital envelop routines" when running `npm run dev`. This error can be resolved by setting an environment variable to support legacy OpenSSL providers prior to running `npm run dev`. See [this discussion](https://stackoverflow.com/questions/74726224/opensslerrorstack-error03000086digital-envelope-routinesinitialization-e) for details.
 
 e.g.: on \*NIX systems:
 

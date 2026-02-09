@@ -37,7 +37,7 @@ services:
     environment:
       - NODE_OPTIONS=--openssl-legacy-provider
       - PORT=4000 # the port at which the react app will run
-      - REACT_APP_BACKEND=http://localhost:3000
+      - VITE_BACKEND=http://localhost:3000
     ports:
       - '4000:4000'
     depends_on:

@@ -13,7 +13,7 @@ const Protected = props => {
   useEffect(() => {
     // send the request to the server api, including the Authorization header with our JWT token in it
     axios
-      .get(`${process.env.REACT_APP_BACKEND}/protected/`, {
+      .get(`${import.meta.env.VITE_BACKEND}/protected/`, {
         headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
       })
       .then(res => {
@@ -21,7 +21,7 @@ const Protected = props => {
       })
       .catch(err => {
         console.log(
-          'The server rejected the request for this protected resource... we probably do not have a valid JWT token.'
+          'The server rejected the request for this protected resource... we probably do not have a valid JWT token.',
         )
         setIsLoggedIn(false) // update this state variable, so the component re-renders
       })

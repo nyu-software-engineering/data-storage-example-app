@@ -6,7 +6,7 @@ on:
 
 env:
   PORT: ${{ secrets.PORT }}
-  REACT_APP_BACKEND: ${{ secrets.REACT_APP_BACKEND }}
+  VITE_BACKEND: ${{ secrets.VITE_BACKEND }}
 
 jobs:
   build:
@@ -47,7 +47,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}:front-end"
+          context: '{{defaultContext}}:front-end'
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: bloombar/data-storage-example-app-front-end:latest
