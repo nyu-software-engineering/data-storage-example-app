@@ -42,6 +42,6 @@ services:
       - '4000:4000'
     depends_on:
       - backend
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm install && npm run dev"
 # volumes:
 #   mongo-data:
