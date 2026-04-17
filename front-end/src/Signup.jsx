@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
+// useAuth gives this component access to the shared auth context.
+import { useAuth } from './AuthContext'
 // import logo from './logo.svg';
 import './Login.css'
 
 const Signup = props => {
+  // Destructure only login() — signup logs the user in immediately on success,
+  // so it needs the same context function as the Login component.
+  const { login } = useAuth()
   // create state variables to hold username and password
   const [response, setResponse] = useState({}) // the API will return an object with a JWT token, if the user logs in successfully
   const [errorMessage, setErrorMessage] = useState('')
 
   // if the user's logged-in status changes, save the token we receive from the server
   useEffect(() => {
-    // if the user is logged-in, save the token to local storage
     if (response.success && response.token) {
       console.log(`User successfully logged in: ${response.username}`)
-      localStorage.setItem('token', response.token) // store the token into localStorage
+      // Calling login() updates the shared context state so every component
+      // that reads isLoggedIn will re-render with the new logged-in status.
+      login(response.token)
     }
   }, [response])
 

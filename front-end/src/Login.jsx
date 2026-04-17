@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
+// useAuth gives this component access to the shared auth context.
+import { useAuth } from './AuthContext'
 // import logo from './logo.svg';
 import './Login.css'
 
 const Login = props => {
+  // Destructure only the login() function from the context — this component
+  // doesn't need to read isLoggedIn or token, it only needs to update them.
+  const { login } = useAuth()
   let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
 
   // create state variables to hold username and password
@@ -20,10 +25,12 @@ const Login = props => {
 
   // if the user's logged-in status changes, save the token we receive from the server
   useEffect(() => {
-    // if the user is logged-in, save the token to local storage
     if (response.success && response.token) {
       console.log(`User successfully logged in: ${response.username}`)
-      localStorage.setItem('token', response.token) // store the token into localStorage
+      // Calling login() updates the context's token state, which causes every
+      // component that reads isLoggedIn (e.g. Protected) to re-render instantly.
+      // It also persists the token to localStorage for page-refresh survival.
+      login(response.token)
     }
   }, [response])
 
